@@ -33,7 +33,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 backend/target/
-backend/.gradle/
 backend/build/
 backend/*.iml
 
@@ -54,3 +53,6 @@ frontend/npm-debug.log*
 frontend/yarn-error.log*
 frontend/coverage/
 nation.sql
+
+# Application properties
+/src/main/resources/application.properties

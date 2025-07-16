@@ -22,3 +22,35 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+### VS Code ###
+.vscode/
+
+# Backend files
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+backend/target/
+backend/.gradle/
+backend/build/
+backend/*.iml
+
+# Global ignores
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Frontend (Angular) specific ignores
+frontend/node_modules/
+frontend/dist/
+frontend/tmp/
+frontend/.angular/cache/
+frontend/npm-debug.log*
+frontend/yarn-error.log*
+frontend/coverage/
+nation.sql

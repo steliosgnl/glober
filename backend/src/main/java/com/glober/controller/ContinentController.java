@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/continents")
-@CrossOrigin // Allow CORS for frontend (Angular)
+@CrossOrigin
 public class ContinentController {
 
     private final ContinentService continentService;

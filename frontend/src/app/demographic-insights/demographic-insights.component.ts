@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subject, switchMap, startWith, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Observable, BehaviorSubject, switchMap, startWith, debounceTime, combineLatest } from 'rxjs';
 import { DemographicService } from '../services/demographic.service';
 import { Region } from '../models/region';
 import { Page } from '../models/page';
@@ -20,7 +20,9 @@ export class DemographicInsightsComponent implements OnInit {
   regions$: Observable<Region[]>;
   statsPage$: Observable<Page<DemographicStat>>;
 
-  private page$ = new Subject<number>();
+  private page$ = new BehaviorSubject<number>(0);
+  sortColumn$ = new BehaviorSubject<string>('countryName');
+  sortDirection$ = new BehaviorSubject<'asc' | 'desc'>('asc');
   private readonly pageSize = 15;
 
   constructor(private fb: FormBuilder, private demographicService: DemographicService) {
@@ -37,19 +39,36 @@ export class DemographicInsightsComponent implements OnInit {
   ngOnInit(): void {
     const filters$ = this.filterForm.valueChanges.pipe(
       startWith(this.filterForm.value),
-      debounceTime(300),
-      distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr))
+      debounceTime(300)
     );
 
-    this.statsPage$ = filters$.pipe(
-      switchMap(filters => this.page$.pipe(
-        startWith(0),
-        switchMap(page => this.demographicService.getStats(filters, page, this.pageSize))
-      ))
+    this.statsPage$ = combineLatest([
+      filters$,
+      this.page$,
+      this.sortColumn$,
+      this.sortDirection$
+    ]).pipe(
+      switchMap(([filters, page, sort, direction]) =>
+        this.demographicService.getStats(filters, page, this.pageSize, sort, direction)
+      )
     );
   }
 
   onPageChange(page: number): void {
     this.page$.next(page);
+  }
+
+  onSort(column: string): void {
+    const currentSortColumn = this.sortColumn$.value;
+    const currentSortDirection = this.sortDirection$.value;
+
+    if (column === currentSortColumn) {
+      this.sortDirection$.next(currentSortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      this.sortColumn$.next(column);
+      this.sortDirection$.next('asc');
+    }
+
+    this.page$.next(0);
   }
 }

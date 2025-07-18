@@ -28,12 +28,30 @@
       <table class="styled-table">
         <thead>
           <tr>
-            <th>Continent</th>
-            <th>Region</th>
-            <th>Country</th>
-            <th>Year</th>
-            <th>Population</th>
-            <th>GDP</th>
+            <th>
+              Continent
+              <button class="sort-btn" (click)="onSort('country.region.continent.name')">⇅</button>
+            </th>
+            <th>
+              Region
+              <button class="sort-btn" (click)="onSort('country.region.name')">⇅</button>
+            </th>
+            <th>
+              Country
+              <button class="sort-btn" (click)="onSort('country.name')">⇅</button>
+            </th>
+            <th>
+              Year
+              <button class="sort-btn" (click)="onSort('year')">⇅</button>
+            </th>
+            <th>
+              Population
+              <button class="sort-btn" (click)="onSort('population')">⇅</button>
+            </th>
+            <th>
+              GDP
+              <button class="sort-btn" (click)="onSort('gdp')">⇅</button>
+            </th>
           </tr>
         </thead>
         <tbody>

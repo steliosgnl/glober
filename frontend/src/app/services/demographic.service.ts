@@ -19,10 +19,14 @@ export class DemographicService {
   }
 
   // Demographic Insights Task - Loading stats with filters and pagination
-  getStats(filters: any, page: number, size: number): Observable<Page<DemographicStat>> {
+  getStats(filters: any, page: number, size: number, sort: string, direction: string): Observable<Page<DemographicStat>> {
     let httpParams = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (sort && direction) {
+      httpParams = httpParams.append('sort', `${sort},${direction}`);
+    }
 
     if (filters.regionId) {
       httpParams = httpParams.append('regionId', filters.regionId);

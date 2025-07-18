@@ -1,5 +1,3 @@
-<p>demographic-insights works!</p>
-
 <div class="container">
   <h2>Demographic Insights</h2>
 
@@ -30,27 +28,63 @@
           <tr>
             <th>
               Continent
-              <button class="sort-btn" (click)="onSort('country.region.continent.name')">⇅</button>
+              <button class="sort-btn"
+                      (click)="onSort('country.region.continent.name')"
+                      [ngClass]="{
+                        'sorted-asc': (sortColumn$ | async) === 'country.region.continent.name' && (sortDirection$ | async) === 'asc',
+                        'sorted-desc': (sortColumn$ | async) === 'country.region.continent.name' && (sortDirection$ | async) === 'desc'
+                      }">
+              </button>
             </th>
             <th>
               Region
-              <button class="sort-btn" (click)="onSort('country.region.name')">⇅</button>
+              <button class="sort-btn"
+                      (click)="onSort('country.region.name')"
+                      [ngClass]="{
+                        'sorted-asc': (sortColumn$ | async) === 'country.region.name' && (sortDirection$ | async) === 'asc',
+                        'sorted-desc': (sortColumn$ | async) === 'country.region.name' && (sortDirection$ | async) === 'desc'
+                      }">
+              </button>
             </th>
             <th>
               Country
-              <button class="sort-btn" (click)="onSort('country.name')">⇅</button>
+              <button class="sort-btn"
+                      (click)="onSort('country.name')"
+                      [ngClass]="{
+                        'sorted-asc': (sortColumn$ | async) === 'country.name' && (sortDirection$ | async) === 'asc',
+                        'sorted-desc': (sortColumn$ | async) === 'country.name' && (sortDirection$ | async) === 'desc'
+                      }">
+              </button>
             </th>
             <th>
               Year
-              <button class="sort-btn" (click)="onSort('year')">⇅</button>
+              <button class="sort-btn"
+                      (click)="onSort('year')"
+                      [ngClass]="{
+                        'sorted-asc': (sortColumn$ | async) === 'year' && (sortDirection$ | async) === 'asc',
+                        'sorted-desc': (sortColumn$ | async) === 'year' && (sortDirection$ | async) === 'desc'
+                      }">
+              </button>
             </th>
             <th>
               Population
-              <button class="sort-btn" (click)="onSort('population')">⇅</button>
+              <button class="sort-btn"
+                      (click)="onSort('population')"
+                      [ngClass]="{
+                        'sorted-asc': (sortColumn$ | async) === 'population' && (sortDirection$ | async) === 'asc',
+                        'sorted-desc': (sortColumn$ | async) === 'population' && (sortDirection$ | async) === 'desc'
+                      }">
+              </button>
             </th>
             <th>
               GDP
-              <button class="sort-btn" (click)="onSort('gdp')">⇅</button>
+              <button class="sort-btn"
+                      (click)="onSort('gdp')"
+                      [ngClass]="{
+                        'sorted-asc': (sortColumn$ | async) === 'gdp' && (sortDirection$ | async) === 'asc',
+                        'sorted-desc': (sortColumn$ | async) === 'gdp' && (sortDirection$ | async) === 'desc'
+                      }">
+              </button>
             </th>
           </tr>
         </thead>

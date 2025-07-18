@@ -1,0 +1,40 @@
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+}
+
+ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+li {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 1.1em;
+  color: #555;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li strong {
+  color: #333;
+}
+
+p {
+  text-align: center;
+  font-size: 1.1em;
+  color: #777;
+}

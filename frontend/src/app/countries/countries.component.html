@@ -1,18 +1,18 @@
-<p>countries works!</p>
+<div class="container">
+  <h2>Countries List</h2>
 
-<h2>Countries List</h2>
+  <div *ngIf="countries$ | async as countries; else loading">
+    <ol>
+      <li *ngFor="let country of countries">
+        <a [routerLink]="['/countries', country.countryId, 'languages']">
+          <strong>{{ country.name }}</strong>
+        </a>
+        (Code: {{ country.countryCode2 }}, Area: {{ country.area | number }} km²)
+      </li>
+    </ol>
+  </div>
 
-<div *ngIf="countries$ | async as countries; else loading">
-  <ol>
-    <li *ngFor="let country of countries">
-      <a [routerLink]="['/countries', country.countryId, 'languages']">
-        <strong>{{ country.name }}</strong>
-      </a>
-      (Code: {{ country.countryCode2 }}, Area: {{ country.area }} km²)
-    </li>
-  </ol>
+  <ng-template #loading>
+    <p>Loading countries...</p>
+  </ng-template>
 </div>
-
-<ng-template #loading>
-  <p>Loading countries...</p>
-</ng-template>

@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: var(--header-footer-bg);
+  padding: 15px 30px;
+  border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: var(--primary-color);
+}
+
+header nav {
+  display: flex;
+  gap: 20px;
+}
+
+header nav a {
+  font-weight: bold;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px 30px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--header-footer-bg);
+  border-top: 1px solid #e7e7e7;
+  font-size: 0.9em;
+  color: #777;
+}
+
+.header-link {
+  text-decoration: none;
+  cursor: pointer;
+}

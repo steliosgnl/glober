@@ -1,1 +1,66 @@
 <p>demographic-insights works!</p>
+
+<div class="container">
+  <h2>Demographic Insights</h2>
+
+  <form [formGroup]="filterForm" class="filter-form">
+    <div class="form-group">
+      <label for="region">Region</label>
+      <select id="region" formControlName="regionId">
+        <option [ngValue]="null">All Regions</option>
+        <option *ngFor="let region of regions$ | async" [value]="region.regionId">
+          {{ region.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="startYear">From Year</label>
+      <input type="number" id="startYear" formControlName="startYear">
+    </div>
+    <div class="form-group">
+      <label for="endYear">To Year</label>
+      <input type="number" id="endYear" formControlName="endYear">
+    </div>
+  </form>
+
+  <div *ngIf="statsPage$ | async as page; else loading">
+    <div class="table-responsive">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Continent</th>
+            <th>Region</th>
+            <th>Country</th>
+            <th>Year</th>
+            <th>Population</th>
+            <th>GDP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stat of page.content">
+            <td>{{ stat.continentName }}</td>
+            <td>{{ stat.regionName }}</td>
+            <td>{{ stat.countryName }}</td>
+            <td>{{ stat.year }}</td>
+            <td>{{ stat.population | number }}</td>
+            <td>{{ stat.gdp | currency:'USD':'symbol':'1.0-0' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-controls" *ngIf="page.totalPages > 1">
+      <button (click)="onPageChange(page.number - 1)" [disabled]="page.number === 0">
+        &laquo; Previous
+      </button>
+      <span>Page {{ page.number + 1 }} of {{ page.totalPages }}</span>
+      <button (click)="onPageChange(page.number + 1)" [disabled]="page.number + 1 >= page.totalPages">
+        Next &raquo;
+      </button>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading data...</p>
+  </ng-template>
+</div>

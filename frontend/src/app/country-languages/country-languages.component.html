@@ -1,0 +1,17 @@
+<p>country-languages works!</p>
+
+<div *ngIf="languages$ | async as languages; else loading">
+  <h2>Spoken Languages</h2>
+  <div *ngIf="languages.length > 0; else noLanguages">
+    <ul>
+      <li *ngFor="let lang of languages">{{ lang.language }}</li>
+    </ul>
+  </div>
+  <ng-template #noLanguages>
+    <p>No official languages found for this country.</p>
+  </ng-template>
+</div>
+
+<ng-template #loading>
+  <p>Loading languages...</p>
+</ng-template>

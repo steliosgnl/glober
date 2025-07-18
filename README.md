@@ -5,7 +5,7 @@ Glober is a full-stack web application designed to explore and analyze global co
 ## Features
 
 * **Countries & Languages:** Browse a list of all countries. Clicking on a country displays all of its spoken languages.
-* **GDP Analysis:** View the year of maximum GDP per capita for each countryg.
+* **GDP Analysis:** View the year of maximum GDP per capita for each country.
 * **Demographic Insights:** A data table displaying detailed continent, region, and country statistics.
 
 

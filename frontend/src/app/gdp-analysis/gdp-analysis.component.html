@@ -1,1 +1,33 @@
 <p>gdp.analysis works!</p>
+
+<div class="container">
+  <h2>GDP Analysis</h2>
+  <h3>Maximum country GDP per capita year</h3>
+
+  <div *ngIf="stats$ | async as stats; else loading" class="table-responsive">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Country Name</th>
+          <th>Country Code (3)</th>
+          <th>Year</th>
+          <th>Population</th>
+          <th>GDP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of stats">
+          <td>{{ stat.countryName }}</td>
+          <td>{{ stat.countryCode3 }}</td>
+          <td>{{ stat.year }}</td>
+          <td>{{ stat.population | number }}</td>
+          <td>{{ stat.gdp | currency:'USD':'symbol':'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading statistics...</p>
+  </ng-template>
+</div>

@@ -27,4 +27,8 @@ export class CountryService {
   getMaxGdpStats(): Observable<MaxGdpStat[]> {
     return this.http.get<MaxGdpStat[]>(`${this.apiUrl}stats/max-gdp-ratio`);
   }
+
+  getCountryName(countryId: number): Observable<{ name: string }> {
+    return this.http.get<{ name: string }>(`${this.apiUrl}countries/${countryId}/name`);
+  }
 }

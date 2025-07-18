@@ -1,6 +1,7 @@
 <div class="container">
+  <h2>Spoken Languages in <span class="country-name">{{ countryName$ | async }}</span></h2>
+
   <div *ngIf="languages$ | async as languages; else loading">
-    <h2>Spoken Languages</h2>
     <div *ngIf="languages.length > 0; else noLanguages">
       <ul>
         <li *ngFor="let lang of languages">{{ lang.language }}</li>

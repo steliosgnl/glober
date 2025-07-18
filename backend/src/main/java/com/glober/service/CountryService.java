@@ -1,6 +1,7 @@
 package com.glober.service;
 
 import com.glober.dto.CountryListDto;
+import com.glober.dto.CountryNameDto;
 import com.glober.dto.LanguageDto;
 import com.glober.repository.CountryLanguageRepository;
 import com.glober.repository.CountryRepository;
@@ -22,5 +23,9 @@ public class CountryService {
 
     public List<LanguageDto> getLanguagesByCountryId(int countryId) {
         return countryLanguageRepository.findLanguagesByCountryId(countryId);
+    }
+
+    public CountryNameDto getCountryNameById(int countryId) {
+        return countryRepository.findNameByCountryId(countryId);
     }
 }

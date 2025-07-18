@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, map } from 'rxjs';
 import { CountryService } from '../services/country.service';
 import { Language } from '../models/language';
 
@@ -14,6 +14,7 @@ import { Language } from '../models/language';
 })
 export class CountryLanguagesComponent implements OnInit {
   languages$!: Observable<Language[]>;
+  countryName$!: Observable<string>;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,11 +22,17 @@ export class CountryLanguagesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.languages$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        const countryId = Number(params.get('id'));
-        return this.countryService.getLanguagesForCountry(countryId);
-      })
+    const countryId$ = this.route.paramMap.pipe(
+      map(params => Number(params.get('id')))
+    );
+
+    this.countryName$ = countryId$.pipe(
+      switchMap(id => this.countryService.getCountryName(id)),
+      map(response => response.name)
+    );
+
+    this.languages$ = countryId$.pipe(
+      switchMap(id => this.countryService.getLanguagesForCountry(id))
     );
   }
 }

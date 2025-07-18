@@ -1,6 +1,7 @@
 package com.glober.controller;
 
 import com.glober.dto.CountryListDto;
+import com.glober.dto.CountryNameDto;
 import com.glober.dto.LanguageDto;
 import com.glober.service.CountryService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,10 @@ public class CountryController {
     @GetMapping("/{id}/languages")
     public ResponseEntity<List<LanguageDto>> getLanguagesForCountry(@PathVariable int id) {
         return ResponseEntity.ok(countryService.getLanguagesByCountryId(id));
+    }
+
+    @GetMapping("/{id}/name")
+    public ResponseEntity<CountryNameDto> getCountryName(@PathVariable int id) {
+        return ResponseEntity.ok(countryService.getCountryNameById(id));
     }
 }
